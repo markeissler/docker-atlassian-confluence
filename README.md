@@ -1,7 +1,7 @@
 # Atlassian Confluence for Docker
 
 __docker-atlassian-confluence__ provides [Atlassian Confluence](https://www.atlassian.com/software/confluence) in a [docker](https://www.docker.com/)
-container to support issue and project tracking for software teams.
+container to support team collaboration.
 
 >BETA: docker-atlassian-confluence is currently in pre-release. That doesn't mean it's not ready for production, it just
 means it hasn't been tested by a large audience yet. The more the merrier and the faster we get to v1.0. Install it,
