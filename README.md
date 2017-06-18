@@ -37,6 +37,10 @@ described in the [Data Persistence](#data-persistence) section above. NFS suppor
 host supports NFS; if deploying to a [Docker swarm](https://docs.docker.com/engine/swarm/) a potential __boot2docker.iso__
 candidate that supports NFS is the [boot2docker-nfs.iso](https://github.com/markeissler/boot2docker-nfs).
 
+## Troubleshooting
+
+For general troubleshooting information check the [Troubleshoot](troubleshoot.md) document.
+
 ## Authors
 
 __docker-atlassian-confluence__ is the work of __Mark Eissler__.
