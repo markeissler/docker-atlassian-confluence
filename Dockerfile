@@ -3,6 +3,7 @@ MAINTAINER Mark Eissler
 
 # Setup useful environment variables
 ENV CONF_HOME     /var/atlassian/confluence
+ENV CONF_RUNTIME  /var/atlassian/confluence_runtime
 ENV CONF_INSTALL  /opt/atlassian/confluence
 ENV CONF_VERSION  6.2.1
 
@@ -20,6 +21,7 @@ RUN set -x \
     && apt-get install --quiet --yes --no-install-recommends libtcnative-1 \
     && apt-get clean \
     && mkdir -p                "${CONF_HOME}" \
+    && mkdir -p                "${CONF_HOME}/index" \
     && chmod -R 700            "${CONF_HOME}" \
     && chown daemon:daemon     "${CONF_HOME}" \
     && mkdir -p                "${CONF_INSTALL}/conf" \
@@ -50,6 +52,27 @@ RUN set -x \
                                "${CONF_INSTALL}/conf/server.xml" \
     && touch -d "@0"           "${CONF_INSTALL}/conf/server.xml" \
     && chown daemon:daemon     "${JAVA_CACERTS}"
+
+# Support Swarm and NFS by moving caches to local (ephemeral) storage.
+#
+#   CONF_HOME/index
+#       - content index, we move all indexes to CONF_RUNTIME for better performance
+#
+#   CONF_HOME/plugins-osgi-cache/felix/felix-cache
+#       - felix plugin cache, we want to move just felix-cache but Confluence will overwrite
+#       a symlink on felix-cache so we move all felix to CONF_RUNTIME
+#
+RUN set -x \
+    && rm -rf                  "${CONF_HOME}/index" \
+    && mkdir -p                "${CONF_HOME}/plugins-osgi-cache" \
+    && chmod -R 700            "${CONF_HOME}" \
+    && chown -R daemon:daemon  "${CONF_HOME}" \
+    && mkdir -p                "${CONF_RUNTIME}/index" \
+    && mkdir -p                "${CONF_RUNTIME}/plugins-osgi-cache/felix" \
+    && chmod -R 700            "${CONF_RUNTIME}" \
+    && chown -R daemon:daemon  "${CONF_RUNTIME}" \
+    && ln -s                   "${CONF_RUNTIME}/index" "${CONF_HOME}/index" \
+    && ln -s                   "${CONF_RUNTIME}/plugins-osgi-cache/felix" "${CONF_HOME}/plugins-osgi-cache/felix"
 
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but

@@ -37,6 +37,40 @@ described in the [Data Persistence](#data-persistence) section above. NFS suppor
 host supports NFS; if deploying to a [Docker swarm](https://docs.docker.com/engine/swarm/) a potential __boot2docker.iso__
 candidate that supports NFS is the [boot2docker-nfs.iso](https://github.com/markeissler/boot2docker-nfs).
 
+Certain JIRA directories are moved out of the application configuration directory and into an ephemeral runtime storage
+area to prevent data corruption startup failures. Specfically, cache directories are moved so that clean re-starts
+are possible; often, when an instance dies Tomcat will not be shutdown cleanly and data corruption is likely to occur
+with regard to the _felix_ plugin cache).
+
+| Directory | Purpose                                                        |
+|:----------|:---------------------------------------------------------------|
+| /var/atlassian/confluence_runtime | runtime storage for caches and indexes |
+
+### SSL Support
+
+You can enable SSL by simply copying a PKCS12 format certificate (`certificate.p12`) into the `CONF_HOME` directory
+(`/var/atlassian/confluence`) and then restarting the container. The PKCS12 file format has been selected to make it
+easier to generate certificates using `openssl`.
+
+An example `openssl` command that will create a PKCS12 file from a private key (`server_key.pem`) and public certficate
+(`server_cert.pem`) follows:
+
+```sh
+prompt> openssl pkcs12 -export -in server_cert.pem \
+    -inkey server_key.pem -out certificate.p12 \
+    -passout pass:changeit -name "confluence"
+```
+
+On container startup, the PCKS12 format certificate.p12 file will be converted and stored in the system JKS keystore.
+
+## Docker Swarm Support
+
+While __docker-atlassian-confluence__ does not support multi-node clustering it does support deployment to a cluster
+with a failover configuration (where only a single Confluence instance is active at any time).
+
+This configuration requires that [Data Persistence over NFS](#data-persistence-nfs) has been configured to share
+Confluence configuration information among replicated instances.
+
 ## Troubleshooting
 
 For general troubleshooting information check the [Troubleshoot](troubleshoot.md) document.
