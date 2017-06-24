@@ -30,6 +30,8 @@ As configured, data on the following volumes will be created to persist data bet
 | /var/atlassian/confluence               | application configuration |
 | /opt/atlassian/confluence/logs          | runtime logs              |
 
+<a name="data-persistence-nfs"></a>
+
 ### Data Persistence over NFS
 
 It may be desirable to configure data persistence over NFS, in which case NFS volumes are mounted at the locations
@@ -70,6 +72,16 @@ with a failover configuration (where only a single Confluence instance is active
 
 This configuration requires that [Data Persistence over NFS](#data-persistence-nfs) has been configured to share
 Confluence configuration information among replicated instances.
+
+## Redeployment Index Regeneration
+
+Indexes are stored in ephemeral storage; consequently, when redeploying the application on top of existing persistent
+storage (i.e. [Data Persistence over NFS](#data-persistence-nfs)) it will be necessary to manually trigger a rebuild of
+all indexes. Log in as a user with administrative permissions, then navigate to:
+
+`Cog > General Configuration > Administration > Content Indexing`
+
+Click on the <kbd>rebuild</kbd> button.
 
 ## Troubleshooting
 
