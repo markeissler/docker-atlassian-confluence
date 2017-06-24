@@ -1,4 +1,15 @@
-# 0.10.0 / 2017-06-20
+# Changelog: docker-atlassian-confluence
+
+## 1.0.0 / 2017-06-24
+
+Update Confluence to 6.2.2.
+
+### Short list of commit messages
+
+  * Update README for redeployment indexing issues.
+  * Update Confluence to 6.2.2.
+
+## 0.10.0 / 2017-06-20
 
 Docker Swarm support! This version adds support for deployment to a cluster with a failover configuration. That is, only
 one instance can be active at a time but the failover instance should startup without encountering errors stemming from
@@ -13,18 +24,18 @@ enable data persistence over NFS volumes.
   * Use ephemeral storage for caches
   * Update README for SSL support.
 
-# 0.9.1 / 2017-06-18
+## 0.9.1 / 2017-06-18
 
 Maintenance release.
 
-## Short list of commit messages
+### Short list of commit messages
 
   * Update README for v0.9.1. Fix app description.
 
-# 0.9.0 / 2017-06-16
+## 0.9.0 / 2017-06-16
 
 Initial release! A _dockerized_ [Atlassian Confluence](https://www.atlassian.com/software/confluence) install.
 
-## Short list of commit messages
+### Short list of commit messages
 
   * Update README for v0.9.0.
