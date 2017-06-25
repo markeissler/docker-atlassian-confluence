@@ -3,11 +3,11 @@
 __docker-atlassian-confluence__ provides [Atlassian Confluence](https://www.atlassian.com/software/confluence) in a [docker](https://www.docker.com/)
 container to support team collaboration.
 
->BETA: docker-atlassian-confluence is currently in pre-release. That doesn't mean it's not ready for production, it just
-means it hasn't been tested by a large audience yet. The more the merrier and the faster we get to v1.0. Install it,
-open issues if you find bugs.
-
 ## Overview
+
+This revision of __docker-atlassian-confluence__ will install:
+
+[Confluence 6.2.3](https://confluence.atlassian.com/doc/issues-resolved-in-6-2-3-918257892.html)
 
 ## Installation
 
@@ -86,6 +86,12 @@ Click on the <kbd>rebuild</kbd> button.
 ## Troubleshooting
 
 For general troubleshooting information check the [Troubleshoot](troubleshoot.md) document.
+
+## Upstream Release Notes
+
+Release notes for all versions of Confluence can be viewed online:
+
+[Confluence Release Notes](https://confluence.atlassian.com/doc/confluence-release-notes-327.html)
 
 ## Authors
 
