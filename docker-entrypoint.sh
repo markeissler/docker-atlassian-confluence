@@ -84,7 +84,7 @@ if [ -f "${CERTIFICATE}" ] || [ -f "${CERTIFICATE}.p12" ]; then
   #
   # This will redirect all traffic to use HTTPS urls.
   #
-  # Location: ${CONF_INSTALL}/WEB-INF/web.xml
+  # Location: ${CONF_INSTALL}/confluence/WEB-INF/web.xml
   # <!--
   # <security-constraint>
   #   <web-resource-collection>
