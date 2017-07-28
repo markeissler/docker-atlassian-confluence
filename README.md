@@ -7,7 +7,7 @@ container to support team collaboration.
 
 This revision of __docker-atlassian-confluence__ will install:
 
-[Confluence 6.2.3](https://confluence.atlassian.com/doc/issues-resolved-in-6-2-3-918257892.html)
+[Confluence 6.2.4](https://confluence.atlassian.com/doc/issues-resolved-in-6-2-4-930907599.html)
 
 ## Installation
 
