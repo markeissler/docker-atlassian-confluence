@@ -1,6 +1,34 @@
 # Changelog: docker-atlassian-confluence
 
-## 1.2.0 / 2017/07-28
+## 1.3.0 / 2017-07-30
+
+Update Confluence to 6.3.1.
+
+### Minor version increment!
+
+Since this is a Minor version increment be sure to review the release notes and upgrade notes:
+
+  * [Confluence 6.3 upgrade notes] (https://confluence.atlassian.com/doc/confluence-6-3-upgrade-notes-909642703.html)
+  * [Confluence 6.3 release notes] (https://confluence.atlassian.com/doc/confluence-6-3-release-notes-909642701.html)
+  * [Confluence 6.3.1 issues resolved] (https://confluence.atlassian.com/doc/issues-resolved-in-6-3-1-931235734.html)
+
+> NOTE: As is common with Atlassian Minor version updates, there is no 6.3.0 release.
+
+### MySQL driver updated to 5.1.42
+
+The included **MySQL** driver has been updated to `5.1.42` in conjunction with included support in this release:
+
+[Updated database drivers](https://confluence.atlassian.com/doc/confluence-6-3-upgrade-notes-909642703.html#Confluence6.3UpgradeNotes-Updateddatabasedrivers)
+
+Atlassian bundles the **Postgres** driver with each release. This release includes version `42.1.1` of the **Postgres** driver.
+
+### Short list of commit messages
+
+  * Update mysql driver to 5.1.42.
+  * Update Confluence to 6.3.1.
+
+
+## 1.2.0 / 2017-07-28
 
 Update Confluence to 6.2.4.
 
