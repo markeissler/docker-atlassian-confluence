@@ -5,7 +5,7 @@ MAINTAINER Mark Eissler
 ENV CONF_HOME     /var/atlassian/confluence
 ENV CONF_RUNTIME  /var/atlassian/confluence_runtime
 ENV CONF_INSTALL  /opt/atlassian/confluence
-ENV CONF_VERSION  6.3.4
+ENV CONF_VERSION  6.4.0
 
 ENV JAVA_CACERTS  $JAVA_HOME/jre/lib/security/cacerts
 ENV CERTIFICATE   $CONF_HOME/certificate
