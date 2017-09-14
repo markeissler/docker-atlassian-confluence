@@ -1,5 +1,20 @@
 # Changelog: docker-atlassian-confluence
 
+## 1.7.0 / 2017-09-14
+
+Update Confluence to 6.4.0.
+
+### Minor version increment!
+
+Since this is a Minor version increment be sure to review the release notes and upgrade notes:
+
+  * [Confluence 6.4 upgrade notes] (https://confluence.atlassian.com/doc/confluence-6-4-upgrade-notes-934721251.html)
+  * [Confluence 6.4 release notes] (https://confluence.atlassian.com/doc/confluence-6-4-release-notes-934721238.html)
+  * [Confluence 6.4.0 issues resolved] (https://confluence.atlassian.com/doc/issues-resolved-in-6-4-0-937165586.html)
+
+> NOTE: Breaking tradition with Atlassian Minor version updates, this time the team did not skip the `.0` release.
+
+
 ## 1.6.0 / 2017-09-14
 
 Update Confluence to 6.3.4.
