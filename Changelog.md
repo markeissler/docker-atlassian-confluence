@@ -1,5 +1,9 @@
 # Changelog: docker-atlassian-confluence
 
+## 1.5.0 / 2017-09-13
+
+Update Confluence to 6.3.3.
+
 ## 1.4.0 / 2017-09-13
 
 Update Confluence to 6.3.2.
