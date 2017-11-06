@@ -1,5 +1,9 @@
 # Changelog: docker-atlassian-confluence
 
+## 1.8.0 / 2017-11-05
+
+Update Confluence to 6.4.1.
+
 ## 1.7.0 / 2017-09-14
 
 Update Confluence to 6.4.0.
@@ -13,7 +17,6 @@ Since this is a Minor version increment be sure to review the release notes and 
   * [Confluence 6.4.0 issues resolved] (https://confluence.atlassian.com/doc/issues-resolved-in-6-4-0-937165586.html)
 
 > NOTE: Breaking tradition with Atlassian Minor version updates, this time the team did not skip the `.0` release.
-
 
 ## 1.6.0 / 2017-09-14
 
@@ -53,7 +56,6 @@ Atlassian bundles the **Postgres** driver with each release. This release includ
 
   * Update mysql driver to 5.1.42.
   * Update Confluence to 6.3.1.
-
 
 ## 1.2.0 / 2017-07-28
 
