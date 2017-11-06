@@ -15,7 +15,7 @@ You may also be interestd in the following projects:
 
 This revision of __docker-atlassian-confluence__ will install:
 
-[Confluence 6.4.2](https://confluence.atlassian.com/doc/issues-resolved-in-6-4-2-938857056.html)
+[Confluence 6.4.3](https://confluence.atlassian.com/doc/issues-resolved-in-6-4-3-939512590.html)
 
 ## Installation
 
