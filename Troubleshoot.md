@@ -1,6 +1,24 @@
-# Troubleshoot Cloud to Server Migrations
+# Troubleshoot Confluence
 
-## Sysadmin user is missing
+## Troubleshoot Database Errors
+
+Confluence can be heavy-handed in the number of simultaneous database connections it requires. As stated in Atlassian's
+[Confluence is displaying pages slowly or showing 503 errors with PostgreSQL](https://confluence.atlassian.com/confkb/confluence-is-displaying-pages-slowly-or-showing-503-errors-with-postgresql-779301245.html)
+document, PostegreSQL relies on __c3p0__ pooling to manage database connection traffic.
+
+One common problem is that Confluence will hang and, ultimately, crash if not enough database connections are available
+and connection timeouts are exceeded. There are two steps to correcting this problem:
+
+- Increase the Postgres `max_connections` parameter in the `postgres.conf` configuration file
+- Increase the `hibernate.c3p0.max_size` parameter in the `<confluence-home>/confluence.cfg.xml` file
+
+The default `max_connections` parameter is 100. And the default `hibernate.c3p0.max_size` is 30. Increase both of these
+values and remember to take into account any other services (e.g. JIRA) that may be connecting to the same Postgres
+server and consuming connections.
+
+## Troubleshoot Cloud to Server Migrations
+
+### Sysadmin user is missing
 
 When you restore a Confluence Cloud site backup to a standalone (self-hosted) server a sysadmin account should become
 available for subsequent login and setup. Most importantly, you will need to login and setup an email server so existing
@@ -19,9 +37,9 @@ If you find you can't login then you will need to make manual corrections at the
 
 <a name="step-1"></a>
 
-## Step 1: Check for users with administrative access
-
+### Step 1: Check for users with administrative access
 Verify that no users exist with administrative access:
+
 
 ```sql
 psql=> select u.id, u.user_name, u.active from cwd_user u
@@ -39,7 +57,7 @@ If the query returns 0 rows, as it does above, proceed to [Step 2](#step-2). Oth
 
 <a name="step-2"></a>
 
-## Step 2: Add a sysadmin account if needed
+### Step 2: Add a sysadmin account if needed
 
 ```sql
 psql=> insert into cwd_user(id, user_name, lower_user_name, active, created_date, updated_date, first_name, lower_first_name, last_name, lower_last_name, display_name, lower_display_name, email_address, lower_email_address, directory_id, credential)
@@ -53,7 +71,7 @@ Proceed to [Step 3](#step-3).
 
 <a name="step-3"></a>
 
-## Step 3: Add a user_mapping for sysadmin
+### Step 3: Add a user_mapping for sysadmin
 
 Check if a user_mapping already exists for `sysadmin`:
 
@@ -76,7 +94,7 @@ Proceed to [Step 4](#step-4).
 
 <a name="step-4"></a>
 
-## Step 4: Add a confluence-administrators group if needed
+### Step 4: Add a confluence-administrators group if needed
 
 Check if we need to add the __confluence-administrators__ group:
 
@@ -102,7 +120,7 @@ Proceed to [Step 5](#step-5).
 
 <a name="step-5"></a>
 
-## Step 5: Add a confluence-users group if needed
+### Step 5: Add a confluence-users group if needed
 
 Check if we need to add the __confluence-users__ group:
 
@@ -128,7 +146,7 @@ Proceed to [Step 6](#step-6).
 
 <a name="step-6"></a>
 
-## Step 6: Add the sysadmin account to the confluence-users group
+### Step 6: Add the sysadmin account to the confluence-users group
 
 Check if we need to add the __sysadmin__ account to the __confluence-users__ group:
 
@@ -152,7 +170,7 @@ psql=> insert into cwd_membership (id, parent_id, child_user_id)
     );
 ```
 
-## Step 7: Add the sysadmin account to the confluence-administrators group:
+### Step 7: Add the sysadmin account to the confluence-administrators group:
 
 Check if we need to add the __sysadmin__ account to the __confluence-administrators__ group:
 
@@ -179,6 +197,6 @@ psql=> insert into cwd_membership (id, parent_id, child_user_id)
 
 <a name="step-8"></a>
 
-## Step 8: Restart Confluence
+### Step 8: Restart Confluence
 
 After making changes as described above you will need to restart the Confluence container.

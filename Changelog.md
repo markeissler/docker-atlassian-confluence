@@ -1,5 +1,17 @@
 # Changelog: docker-atlassian-confluence
 
+## 1.11.0 / 2018-01-28
+
+Update Confluence to 6.5.0.
+
+### Minor version increment!
+
+Since this is a Minor version increment be sure to review the release notes and upgrade notes:
+
+  * [Confluence 6.5 upgrade notes] (https://confluence.atlassian.com/doc/confluence-6-5-upgrade-notes-938862633.html)
+  * [Confluence 6.5 release notes] (https://confluence.atlassian.com/doc/confluence-6-5-release-notes-938862614.html)
+  * [Confluence 6.5.0 issues resolved] (https://confluence.atlassian.com/doc/issues-resolved-in-6-5-0-939699975.html)
+
 ## 1.10.0 / 2017-11-05
 
 Update Confluence to 6.4.3.

@@ -5,7 +5,7 @@ MAINTAINER Mark Eissler
 ENV CONF_HOME     /var/atlassian/confluence
 ENV CONF_RUNTIME  /var/atlassian/confluence_runtime
 ENV CONF_INSTALL  /opt/atlassian/confluence
-ENV CONF_VERSION  6.4.3
+ENV CONF_VERSION  6.5.0
 
 ENV JAVA_CACERTS  $JAVA_HOME/jre/lib/security/cacerts
 ENV CERTIFICATE   $CONF_HOME/certificate
@@ -17,7 +17,7 @@ ENV CERTIFICATE   $CONF_HOME/certificate
 #
 RUN set -x \
     && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends xmlstarlet \
+    && apt-get install --quiet --yes --no-install-recommends xmlstarlet libxml2-utils \
     && apt-get install --quiet --yes --no-install-recommends libtcnative-1 \
     && apt-get clean \
     && mkdir -p                "${CONF_HOME}" \
@@ -52,6 +52,33 @@ RUN set -x \
                                "${CONF_INSTALL}/conf/server.xml" \
     && touch -d "@0"           "${CONF_INSTALL}/conf/server.xml" \
     && chown daemon:daemon     "${JAVA_CACERTS}"
+
+# Configure c3p0 datbase connection pools.
+#
+# Original configuration will be copied to confluence.cfg.xml.dist. Updates are provided to prevent Confluence from
+# spawning excessive database connections instead of reusing existing idle connections.
+#
+# @TODO: The confluence.cfg.xml file does not exist until after the user has completed the install process. At best,
+# the following commands could be copied to a script that is run via cron.
+#
+# RUN set -x \
+#     && cp                      "${CONF_HOME}/confluence.cfg.xml" "${CONF_HOME}/confluence.cfg.xml.dist" \
+#     && xmlstarlet              ed --pf --ps \
+#         --update               "confluence-configuration/properties/property[@name='hibernate.c3p0.acquire_increment']" --value "1" \
+#         --update               "confluence-configuration/properties/property[@name='hibernate.c3p0.idle_test_period']" --value "60" \
+#         --update               "confluence-configuration/properties/property[@name='hibernate.c3p0.max_size']" --value "100" \
+#         --update               "confluence-configuration/properties/property[@name='hibernate.c3p0.max_statements']" --value "50" \
+#         --update               "confluence-configuration/properties/property[@name='hibernate.c3p0.min_size']" --value "20" \
+#         --update               "confluence-configuration/properties/property[@name='hibernate.c3p0.timeout']" --value "0" \
+#         --append               "confluence-configuration/properties/property[@name='hibernate.c3p0.timeout']" \
+#                                   --type elem --name "property" --value "3" \
+#                                   --insert "confluence-configuration/properties/property[not(@name)]" \
+#                                   --type attr --name "name" --value "hibernate.c3p0.acquireRetryAttempts" \
+#         --append               "confluence-configuration/properties/property[@name='hibernate.c3p0.acquireRetryAttempts']" \
+#                                   --type elem --name "property" --value "250" \
+#                                   --insert "confluence-configuration/properties/property[not(@name)]"  \
+#                                   --type attr --name "name" --value "hibernate.c3p0.acquireRetryDelay" \
+#                                "${CONF_HOME}/confluence.cfg.xml.dist" | xmllint --format - > "${CONF_INSTALL}/confluence.cfg.xml"
 
 # Support Swarm and NFS by moving caches to local (ephemeral) storage.
 #
