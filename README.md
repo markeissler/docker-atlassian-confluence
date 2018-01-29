@@ -5,7 +5,7 @@ container to support team collaboration.
 
 ## Related Projects
 
-You may also be interestd in the following projects:
+You may also be interested in the following projects:
 
   * [Dockerized Atlassian Crowd](https://github.com/markeissler/docker-atlassian-crowd) - centralized identity management
   * [Dockerized Atlassian JIRA](https://github.com/markeissler/docker-atlassian-jira) - project tracking for software teams
@@ -15,7 +15,7 @@ You may also be interestd in the following projects:
 
 This revision of __docker-atlassian-confluence__ will install:
 
-[Confluence 6.4.3](https://confluence.atlassian.com/doc/issues-resolved-in-6-4-3-939512590.html)
+[Confluence 6.5.0](https://confluence.atlassian.com/doc/issues-resolved-in-6-5-0-939699975.html)
 
 ## Installation
 
